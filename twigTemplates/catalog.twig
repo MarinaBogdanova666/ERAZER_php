@@ -1,0 +1,36 @@
+<h2>Каталог по выбору</h2>
+<div>
+    <form>
+        <select name="select1">
+            <option value="value1" selected>Марка</option>
+            <option value="value1">Значение 1</option>
+            <option value="value2" >Значение 2</option>
+            <option value="value3">Значение 3</option>
+        </select>
+        <select name="select2">
+            <option value="value1" selected>Объём</option>
+            <option value="value1">Значение 1</option>
+            <option value="value2">Значение 2</option>
+            <option value="value3" >Значение 3</option>
+        </select>
+        <select name="select3">
+            <option value="value1" selected>Модель</option>
+            <option value="value1" >Значение 1</option>
+            <option value="value2">Значение 2</option>
+            <option value="value3">Значение 3</option>
+        </select>
+        <button type="submit">Подобрать</button>
+    </form>
+</div>
+
+
+<div id="catalog" class="products">
+
+</div>
+<script src="/js/catalog.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", event => {
+        let catalog = new Products('catalog', {{ page_size }});
+        catalog.fillVisible();
+    });
+</script>
