@@ -54,7 +54,7 @@ class App {
     }    
 
     cartTotalUpdate(count) {
-        document.getElementById("header_cart").innerText = "Корзина (" + Number(count) + ")"; 
+        document.getElementById("cart_counter").innerText =`${Number(count)}`;
     }
     
     addListenerToBtnBuy(querySelector) {

@@ -1,0 +1,10 @@
+<h3>Поиск по сайту</h3>
+<form action="/search" method="post">
+	<input type="search" name="search">
+	<button>Поиск</button>
+</form>
+<p class="error_message">{{ item.message_error }}</p>
+{% for value in item %}
+	<h5>{{ value.name }}</h5>
+	<p>{{ value.description }}</p> 
+{% endfor %}

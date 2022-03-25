@@ -18,7 +18,7 @@
         <?php endif; ?>    
     </div>
     <div class="header__cart">
-        <a id="header_cart" href="/cart">Корзина (<?=$count_in_cart?>)</a>
+        <a id="header_cart" href="/cart"><?=$count_in_cart?></a>
     </div> 
     </div>   
 </header>

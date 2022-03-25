@@ -17,8 +17,15 @@ class ProductsRepository extends Repository
         return "products";
     }
 
+//    Функция получения всех моделей для формы с выбором(только наработка)
+
     public function getModels() {
         $sql = "SELECT * FROM models GROUP BY brand ORDER BY brand ASC";
+        return $this->getDb()->queryAll($sql);
+    }
+
+    public function getSearch($params) {
+        $sql = "SELECT * FROM `products` WHERE MATCH (name,description) AGAINST ('{$params}')";
         return $this->getDb()->queryAll($sql);
     }
 }

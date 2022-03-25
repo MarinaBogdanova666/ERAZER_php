@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Ноя 18 2020 г., 18:45
--- Версия сервера: 10.3.22-MariaDB
--- Версия PHP: 7.4.5
+-- Время создания: Мар 25 2022 г., 16:59
+-- Версия сервера: 8.0.24
+-- Версия PHP: 7.3.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,11 +28,11 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `cart` (
-  `id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT 0,
-  `session_id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL
+  `id` int NOT NULL,
+  `product_id` int NOT NULL,
+  `quantity` int NOT NULL,
+  `user_id` int DEFAULT '0',
+  `session_id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -42,7 +42,20 @@ CREATE TABLE `cart` (
 INSERT INTO `cart` (`id`, `product_id`, `quantity`, `user_id`, `session_id`) VALUES
 (105, 66, 4, 0, 'vrga5sonhkjhhmjv7m65a70vp8s3ogep'),
 (106, 68, 3, 0, 'vrga5sonhkjhhmjv7m65a70vp8s3ogep'),
-(107, 65, 6, 0, 'vrga5sonhkjhhmjv7m65a70vp8s3ogep');
+(107, 65, 6, 0, 'vrga5sonhkjhhmjv7m65a70vp8s3ogep'),
+(108, 68, 2, 0, '6n58kou38dcvo9tbkanf4urcolo7rp8c'),
+(111, 68, 2, 6, '6n58kou38dcvo9tbkanf4urcolo7rp8c'),
+(112, 66, 1, 0, 'jt22at3tbl59186qmp0b8l607hvqv9fv'),
+(113, 68, 1, 0, 'jt22at3tbl59186qmp0b8l607hvqv9fv'),
+(114, 66, 1, 0, '1pfqc86stsu6640epibb47coeql36uug'),
+(115, 68, 1, 0, '1pfqc86stsu6640epibb47coeql36uug'),
+(116, 66, 1, 7, '1pfqc86stsu6640epibb47coeql36uug'),
+(117, 68, 1, 7, '1pfqc86stsu6640epibb47coeql36uug'),
+(130, 71, 1, 0, 's0du2tut85ipt3frcvn9agkiof745bi2'),
+(131, 66, 1, 0, 's0du2tut85ipt3frcvn9agkiof745bi2'),
+(132, 68, 2, 0, 'e10hmfi55aceunafmpaffqnhjmh9nad8'),
+(133, 66, 1, 0, 'e10hmfi55aceunafmpaffqnhjmh9nad8'),
+(159, 66, 2, 0, 'rkgu46vanhnndci3jl9r2k3kg6jmj47c');
 
 -- --------------------------------------------------------
 
@@ -51,9 +64,9 @@ INSERT INTO `cart` (`id`, `product_id`, `quantity`, `user_id`, `session_id`) VAL
 --
 
 CREATE TABLE `feedback` (
-  `id` int(11) NOT NULL,
-  `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `feedback` text COLLATE utf8mb4_unicode_ci NOT NULL
+  `id` int NOT NULL,
+  `name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `feedback` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -64,12 +77,7 @@ INSERT INTO `feedback` (`id`, `name`, `feedback`) VALUES
 (1, 'admin', 'Все ок'),
 (4, 'Кто то ', 'Привет'),
 (5, 'admin', 'Забаню'),
-(6, 'Админ', 'Привет мир'),
-(10, 'Супер автор', 'Отличный отзыв 11'),
-(16, 'Стив Джобс', 'Привет мир'),
-(17, 'Дмитрий', 'Не последний отзыв'),
-(35, 'Иван Андреевич', 'Отличный отзыв'),
-(36, 'Обучающийся', 'Из-за того, что поменялась архитектура пришлось с помощью костылей старые отзывы прикручивать. 1');
+(6, 'Админ', 'Привет мир');
 
 -- --------------------------------------------------------
 
@@ -78,10 +86,10 @@ INSERT INTO `feedback` (`id`, `name`, `feedback`) VALUES
 --
 
 CREATE TABLE `feedback_product` (
-  `id` int(11) NOT NULL,
-  `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `feedback` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `product_id` int(11) NOT NULL
+  `id` int NOT NULL,
+  `name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `feedback` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -107,10 +115,10 @@ INSERT INTO `feedback_product` (`id`, `name`, `feedback`, `product_id`) VALUES
 --
 
 CREATE TABLE `gallery` (
-  `ID` int(11) NOT NULL,
-  `filename` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `size` int(11) NOT NULL,
-  `views` int(11) NOT NULL DEFAULT 0
+  `ID` int NOT NULL,
+  `filename` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `size` int NOT NULL,
+  `views` int NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -137,13 +145,45 @@ INSERT INTO `gallery` (`ID`, `filename`, `size`, `views`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `models`
+--
+
+CREATE TABLE `models` (
+  `id` int NOT NULL,
+  `brand` varchar(255) NOT NULL,
+  `models` varchar(255) NOT NULL,
+  `volume` varchar(255) NOT NULL,
+  `model_year` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `models`
+--
+
+INSERT INTO `models` (`id`, `brand`, `models`, `volume`, `model_year`) VALUES
+(1, 'KTM', 'Duke 125', '125', '2020'),
+(2, 'KTM', 'Duke 250', '250', '2015'),
+(3, 'Honda', 'CRF300 RALLY', '300', '1998'),
+(4, 'Kawasaki', 'Ninja 650R', '650', '1995'),
+(5, 'Honda', 'CBR650F', '650', '2020'),
+(6, 'BMW', 'G310GS', '310', '1998'),
+(7, 'Honda', 'NC750X', '750', '2010'),
+(8, 'Yamaha', 'TRACER900', '900', '1999'),
+(9, 'Suzuki', 'GSX-R600', '600', '2015'),
+(10, 'Bajaj', 'Dominar', '400', '2017'),
+(11, 'BMW', 'S1000R', '1000', '2002'),
+(12, 'Honda', 'CB1000R', '1000', '2010');
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `news`
 --
 
 CREATE TABLE `news` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `title` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `text` text COLLATE utf8mb4_unicode_ci NOT NULL
+  `id` int UNSIGNED NOT NULL,
+  `title` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -151,8 +191,8 @@ CREATE TABLE `news` (
 --
 
 INSERT INTO `news` (`id`, `title`, `text`) VALUES
-(1, 'Опубликованы детали разговора Путина и Клинтона о гибели подлодки \"Курск\"', 'МОСКВА, 5 окт — РИА Новости. Цифровая библиотека Билла Клинтона рассекретила стенограммы бесед экс-президента США с Владимиром Путиным, одна из которых касалась катастрофы подводной лодки \"Курск\" в августе 2000 года.\r\nВстреча лидеров двух стран состоялась 6 сентября 2000 года в президентском номере нью-йоркской гостиницы Waldorf Astoria.\r\nВ начале беседы Клинтон выразил соболезнования в связи с гибелью \"Курска\", а Путин признал, что у него не было хорошего варианта в сложившейся ситуации.'),
-(2, 'ОЗХО направит в Россию экспертов для расследования по делу Навального', 'МОСКВА, 5 окт — РИА Новости. Организация по запрещению химического оружия (ОЗХО) готова предоставить России группу экспертов для расследования инцидента с Алексеем Навальным.\r\nСоответствующее обращение из Москвы поступило 1 октября.\r\n\"Второго октября генеральный директор ОЗХО Фернандо Ариас ответил на этот запрос письмом на имя постоянного представителя России при ОЗХО. Он заверил <...>, что технический секретариат готов предоставить запрашиваемую экспертизу и что группа экспертов может быть размещена в короткие сроки\", — сказано в сообщении.\r\nОтмечается, что гендиректор попросил российскую сторону дать дополнительные разъяснения относительно типа запрашиваемой экспертизы, а также поблагодарил за доверие.');
+(1, 'Новые детали уже в наличии!', 'Для заказа пишите или звоните'),
+(2, 'Мы наконец-то открылись', 'Очень надеюсь что всё получится');
 
 -- --------------------------------------------------------
 
@@ -161,14 +201,14 @@ INSERT INTO `news` (`id`, `title`, `text`) VALUES
 --
 
 CREATE TABLE `orders` (
-  `id` int(11) NOT NULL,
-  `date` datetime NOT NULL DEFAULT current_timestamp(),
-  `userId` int(11) NOT NULL,
-  `status` enum('Новый','Подтвержден','Оплачен','Выдан','Отменен') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Новый',
-  `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` bigint(8) NOT NULL,
-  `address` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `uId` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL
+  `id` int NOT NULL,
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `userId` int NOT NULL,
+  `status` enum('Новый','Подтвержден','Оплачен','Выдан','Отменен') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Новый',
+  `name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` bigint NOT NULL,
+  `address` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `uId` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -180,24 +220,11 @@ INSERT INTO `orders` (`id`, `date`, `userId`, `status`, `name`, `phone`, `addres
 (7, '2020-10-17 18:08:40', 0, 'Оплачен', 'Дмитрий', 79771175704, 'Москва', '15470743565f8b08f8260fa3.69380903'),
 (8, '2020-10-17 18:35:42', 0, 'Новый', 'Дмитрий', 79771175704, 'Москва, Верхняя Красносельская 10к7а, 120', '7831725235f8b0f4e165908.35482044'),
 (9, '2020-10-17 18:38:25', 0, 'Новый', 'Дмитрий', 79771175704, 'Москва', '9882337285f8b0ff1570814.36086473'),
-(10, '2020-10-17 18:41:46', 0, 'Новый', 'Михаил', 79888888888, 'Москва, Кремаль', '17770870195f8b10ba76fad1.54576059'),
-(11, '2020-10-17 18:43:35', 0, 'Новый', 'Дмитрий', 79999999999, 'ул. Новая, 5', '8121252925f8b1127a3e533.17526315'),
-(12, '2020-10-17 18:44:35', 1, 'Новый', 'Стив Джобс', 79191919191, 'Москва, ул. Вавилова', '12177005055f8b11630b0a19.30509404'),
-(13, '2020-10-17 18:58:01', 1, 'Подтвержден', 'Стив Джобс', 79292922929, 'Москва, Преображенская', '12997233595f8b14898c3a01.52524607'),
-(14, '2020-10-17 18:58:50', 1, 'Оплачен', 'Вася Иванов', 79292921911, 'Владимирская обл.', '16770767915f8b14ba7cfc70.10239757'),
-(15, '2020-10-17 19:00:24', 1, 'Новый', 'Миша', 79111111111, 'Заберу сам', '14544876635f8b151848b2f1.50470674'),
-(16, '2020-10-17 19:01:04', 1, 'Выдан', 'Стив Джобс', 79999999999, '9', '1843035125f8b1540ed53e3.24931597'),
-(17, '2020-10-17 22:20:42', 3, 'Оплачен', 'Вася', 79843334343, 'Васин адрес', '482715095f8b440a46bc88.23095635'),
-(18, '2020-10-17 22:34:58', 1, 'Подтвержден', 'Стив Джобс', 79543343543, 'США', '6343891065f8b47620ffdd3.86066331'),
-(19, '2020-10-18 16:20:36', 3, 'Выдан', 'Василий Иванович', 79999999999, 'Новый Адрес', '4069972035f8c4124678d23.98108290'),
-(20, '2020-10-22 12:02:12', 1, 'Новый', 'Стив Джобс', 79771111111, '-', '5514604465f914a94ca2f59.28723275'),
-(21, '2020-11-18 16:50:19', 1, 'Новый', 'Стив Джобс', 777777, '888', '9176217485fb5269b888838.72564984'),
-(22, '2020-11-18 17:05:10', 1, 'Новый', 'Стив Джобс', 71234567789, 'Домой', '19172724135fb52a1687ed08.27634983'),
-(26, '2020-11-18 17:08:46', 1, 'Новый', 'Стив Джобс', 78888, '888', '8086820555fb52aee4b7285.63727739'),
-(27, '2020-11-18 17:10:34', 1, 'Новый', 'Стив Джобс', 78888, '888', '15049038445fb52b5aafa171.66606121'),
-(28, '2020-11-18 17:12:12', 1, 'Новый', 'Стив Джобс', 78888, '888', '7475044545fb52bbc71e1a0.63071010'),
-(29, '2020-11-18 17:13:16', 1, 'Новый', 'Стив Джобс', 78888, '888', '12080192045fb52bfc374a77.52645429'),
-(30, '2020-11-18 17:14:32', 1, 'Подтвержден', 'Стив Джобс', 79484832999, 'Новая улица', '17328063675fb52c48a80ee4.58106387');
+(32, '2021-12-27 13:24:57', 8, 'Подтвержден', 'Bogdanova Marina', 79655739552, 'Ореховая ', '15581449461c994790c7342.58669941'),
+(33, '2021-12-27 13:43:05', 8, 'Выдан', 'Bogdanova Marina', 79655739552, 'Ореховая 95, ', '6586176761c998b9791897.83885758'),
+(34, '2021-12-27 14:02:45', 8, 'Оплачен', 'Bogdanova Marina', 79655739552, 'Ореховая 95', '114968970961c99d55f13298.21658342'),
+(35, '2021-12-27 14:10:12', 0, 'Отменен', 'arin', 89655739552, 'Ореховая 95, ', '213922467461c99f14c18688.89275017'),
+(36, '2021-12-27 15:08:07', 0, 'Оплачен', 'Bogdanova', 89655739552, 'Ореховая 95, ', '120913144061c9aca7ece053.46984194');
 
 -- --------------------------------------------------------
 
@@ -206,10 +233,10 @@ INSERT INTO `orders` (`id`, `date`, `userId`, `status`, `name`, `phone`, `addres
 --
 
 CREATE TABLE `order_items` (
-  `id` int(11) NOT NULL,
-  `orderId` int(11) NOT NULL,
-  `productId` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
+  `id` int NOT NULL,
+  `orderId` int NOT NULL,
+  `productId` int NOT NULL,
+  `quantity` int NOT NULL,
   `price` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -256,7 +283,17 @@ INSERT INTO `order_items` (`id`, `orderId`, `productId`, `quantity`, `price`) VA
 (52, 30, 69, 5, 56060),
 (53, 30, 3, 5, 49990),
 (54, 30, 68, 1, 47910),
-(55, 30, 3, 6, 49990);
+(55, 30, 3, 6, 49990),
+(56, 31, 5, 1, 59990),
+(57, 31, 66, 1, 47540),
+(58, 32, 68, 1, 4791),
+(59, 32, 66, 1, 4754),
+(60, 33, 69, 1, 5606),
+(61, 0, 71, 1, 5060),
+(62, 34, 67, 1, 5113),
+(63, 35, 68, 1, 4791),
+(64, 35, 66, 1, 4754),
+(65, 36, 71, 1, 5060);
 
 -- --------------------------------------------------------
 
@@ -265,30 +302,32 @@ INSERT INTO `order_items` (`id`, `orderId`, `productId`, `quantity`, `price`) VA
 --
 
 CREATE TABLE `products` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `price` int(11) NOT NULL
+  `id` int NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` int NOT NULL,
+  `quantity_stock` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Нет в наличии',
+  `models_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Дамп данных таблицы `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `description`, `image`, `price`) VALUES
-(3, 'Ноутбук игровой ASUS F571GT-BQ703T', 'Компактный ноутбук, с достаточно мощным железом внутри. Два вентилятора, что в нём стоят, не дают ему нагреваться до высоких температур, даже когда запускаешь требовательные программы и игры ( в частности raindbow six siege на высоких шла плавно, ноут ощутимо не нагревался) . Экран оказался на удивление хорошим, хоть это и ips-level ( по сути TFT, но доработанный) и оставил о себе приятное впечатление. Подсветка есть, разъём под SD карту есть, HDMI есть, E кабель есть. Возможно это и не плюс, но блок питания компактный.', 'asus.png', 49990),
-(4, 'Ноутбук игровой ASUS TUF Gaming FX705DT-AU027T', 'ASUS TUF Gaming FX705 AMD Edition – это современный игровой ноутбук в корпусе повышенной прочности, которая подтверждена строгими тестами по стандарту MIL-STD-810G. В аппаратную конфигурацию устройства входит новейший процессор AMD Ryzen и дискретная видеокарта Radeon. IPS-дисплей NanoEdge со сверхтонкой рамкой поддерживает технологию адаптивной синхронизации AMD FreeSync, гарантируя высокое качество изображения. TUF Gaming FX705 AMD Edition – отличная игровая платформа по разумной цене!', 'asus2.jpg', 79990),
-(5, 'Ноутбук Apple MacBook Pro 13 i5 1,4/8Gb/512SSD Sil', ' Особого отношения к себе не требует, сам себя чистит от ошибок и всего мусора за исключением хвостов от удаленных программ (периодически приходится подчищать). Работал с видосами, быстро рендрит. Советую покупать больше памяти, или доп. ж/д для хранения. Есть интересные моменты с форматами чтения дисков, ж/дисков, флешек и т.д. Уточняйте с чем работает. ', 'mac.jpg', 59990),
-(64, 'Ноутбук HP ProBook 440 G7 (9HP63EA)', 'Этот полнофункциональный, тонкий, легкий и надежный HP ProBook 440 предоставляет всю необходимые возможности для любого бизнеса по доступной цене. Автоматические функции безопасности, высочайшая производительность и длительное время работы от аккумулятора помогают поддерживать максимальную эффективность вашего бизнеса.', 'undefined.jpg', 68990),
-(65, 'Ноутбук Asus K413FA-EB525T (90NB0Q0F-M07880)', 'ASUS VivoBook 14 K413FA — это яркий ноутбук, который добавит динамизма и стиля в твою повседневную жизнь. Современная конфигурация с процессором Intel Core i7 обеспечит всю необходимую для дел вычислительную мощность, а инновационный тачпад NumberPad 2.0 еще больше облегчит работу с числами.', 'undefined.jpg', 49800),
-(66, 'Ноутбук Asus Pro P1440FA-FA2079 (90NX0212-M26420)', 'Ноутбук ASUSPRO P1440FA-FA2079 (90NX0212-M26420) — отличный выбор для решения бизнес задач.Жидко-кристаллическая TN матрица с диагональю 14 и разрешением FHD (1920×1080 / 16:9) имеет матовое покрытие, отлично отображает графику и текст. Современный 4 ядерный процессор Intel Core i5-10210U с тактовой частотой 1600 Мгц обеспечивает достаточную производительность с невысоким энергопотреблением. В базовой комплектации установлено 8 Гб памяти DDR4 non-ECC которую, в случае необходимости, можно расширить до 20Gb. Ноутбук оснащен накопителем SSD 256Gb, который обеспечивает надежное хранение и быстрый доступ к программам, документам и фотографиям. Встроенная интегрированная видеокарта Intel UHD Graphics, позволяет эффективно работать с графикой и видео. Корпус ноутбука имеет серый цвет, и выполнен из металла/пластика. Небольшой вес ноутбука 1.6 кг позволяет работать с ним как дома или в офисе, так и брать его в дорогу.', 'undefined.jpg', 47540),
-(67, 'Ноутбук HP ProBook 430 G6 (5TL35ES)', 'Функциональный, тонкий и легкий ноутбук HP ProBook 430 обеспечивает высокую продуктивность работы как в офисе, так и за его пределами. Стильный дизайн, мощный процессор и длительное время автономной работы делают ноутбук HP ProBook незаменимым помощником для современных пользователей.\r\nИдеальное решение для специалистов в компаниях малого и среднего бизнеса, которым необходим приемлемый по цене ноутбук, сочетающий в себе инновационные технологии, эффективные средства защиты и передовые функции работы с мультимедиа.', 'undefined.jpg', 51130),
-(68, 'Ноутбук Lenovo IP5 15ARE05 (81YQ0019RU)', 'Наслаждайтесь четким изображением на 15-дюймовом FHD-дисплее и насыщенным звуком фронтальных динамиков с поддержкой технологии Dolby Audio . Этот ноутбук с металлической верхней панелью и новой, мягкой на ощупь отделкой корпуса просто приятно взять в руки.', 'undefined.jpg', 47910),
-(69, 'Ноутбук Acer Extensa 15 EX215-52-519Y (NX.EG8ER.00E)', 'Ноутбуки Extensa 15 разработаны для деловых людей, которым необходима достаточная вычислительная мощность и функциональность на каждый день. В них есть все, что нужно для комфортной работы, а время автономной работы достигает 9 часов. Эти 15,6-дюймовые ноутбуки с большим экраном обеспечивают высокую производительность и предоставляют полный набор важных бизнес-функций, а также оснащены цифровой клавиатурой.', 'undefined.jpg', 56060),
-(70, 'Ноутбук HP ProBook 440 G7 (2D289EA)', 'Ноутбук HP ProBook 440, оснащенный новейшим процессором Intel 10-го поколения, отличается длительным временем работы от аккумулятора и высокоскоростным подключением. С его способностями к многозадачности любые горящие сроки вам нипочем.', 'undefined.jpg', 57680),
-(71, 'Ноутбук Lenovo IdeaPad L3 15IML05 (81Y3001PRU)', 'Ноутбук Lenovo IdeaPad L3 15IML05 (81Y3001PRU) оснащен 15.6-дюймовым экраном, мощным процессором Intel Core i5 10210U (Comet Lake) 1.6 ГГц, производительной видеокартой Intel UHD Graphics. Модель IdeaPad L3-15 популярна среди покупателей, часто пользующихся ноутбуком как вне помещений, так и в офисе. Ноутбуки Lenovo популярны среди покупателей благодаря приемлемой цене, превосходному качеству продукции и широкому выбору конфигураций.', 'undefined.jpg', 50600),
-(72, 'Ноутбук HP ProBook 450 G7 (8VU58EA)', 'Этот полнофункциональный, тонкий, легкий и надежный HP ProBook 450 предоставляет всю необходимые возможности для любого бизнеса по доступной цене. Автоматические функции безопасности, высочайшая производительность и длительное время работы от аккумулятора помогают поддерживать максимальную эффективность вашего бизнеса.\r\nИдеальное решение для специалистов в компаниях малого и среднего бизнеса, которым необходим приемлемый по цене ноутбук, сочетающий в себе инновационные технологии, эффективные средства защиты и передовые функции работы с мультимедиа.', 'undefined.jpg', 100730);
+INSERT INTO `products` (`id`, `name`, `description`, `image`, `price`, `quantity_stock`, `models_id`) VALUES
+(3, 'Клетка на мотоцикл HONDA CBR650F', 'Усиленная клетка серии PRO, Crashbars Engine Guard для: HONDA CBR650F 2014-2018 HONDA CBR650FA 2014-2018 HONDA CB650FA 2014-2018 HONDA CB650F 2014-2018 специально спроектированная нами для мотоциклистов которые ценят комфорт, безопасность и надежность. Клетка усилена ребрами, образующими жесткие узлы во избежание продольных и поперечных деформаций. В комплекте вы найдете 4 сменных слайдера (по 2 на каждую сторону), которые располагаются таким образом, что динамический коэффициент при падении мотоцикла распределяется равномерно на все точки крепления каркасов. Важно! - Клетка очень компактна и не ощущается райдером. Ее габариты оставляют маневренность мотоцикла на прежнем уровне как и без обвеса! Обратите внимание что клетка поставляется в классическом черном цвете.', 'honda_CBR650F.jpeg', 16990, 'Нет в наличии', 5),
+(4, 'Дуги учебные на мотоцикл KTM Duke 125', 'Дуги учебные на мотоцикл KTM Duke 125, Duke 390 до -`16, Duke 200 `12-`21 специально спроектированна для использования мотоцикла новичками первосезонниками или для частых падений на учебных площадках. В районе подножек и лапок тормоза и переключения передач нами предусмотрено расширение каркасов клетки. Теперь Вам не придется подваривать подножки после каждого соприкосновения мотоцикла с асфальтом. Узлы мотоклетки усилены стяжками образующими жесткие узлы во избежание продольных и поперечных деформаций. Покраска в цвет отличный от черного или оранжевого опционально по каталогу RAL.', 'ktm_DUKE125.jpeg', 11990, 'Под заказ', 1),
+(5, 'Дуги на мотоцикл HONDA CRF300 RALLY', 'Дуги безопасности для Honda CRF300 Крепление осуществляется на 2 точки с каждой стороны мотоцикла. Левая и правая половинки соединены дополнительно между собой через две стальные штанги, что делает конструкцию максимально прочной. ', 'honda_CRF300.jpeg', 10990, '30', 3),
+(64, 'Клетка на мотоцикл KAWASAKI Ninja 650R', 'Клетки серии DAMPER пришли в мир дорожных мотоциклов из стантрайдинга и являются продолжением нашей знаменитой серии клеток PRO. Геометрия клетки DAMPER идентична клеткам PRO, но основное отличие этих клеток в слайдерах. В данном случае вварены четрыре демпферных узла. Демпферный узел - это система со слайдером, которая закреплена на клетке не жестко, а имеет возможность двигаться под воздействием внешней силы. При этом большая часть этой силы уходит на сжимание демпфирующего элемента и не передается на раму и двигатель мотоцикла! Конечно такая конструкция делает клетку несколько шире, однако мы настоятельно рекомендуем их новичкам, мотошколам и многим продвинутым райдерам.', 'kawasaki_NINJA650R.jpeg', 25990, 'Нет в наличии', 4),
+(65, 'Дуги на мотоцикл BMW G310GS', 'Дуги безопасности Crash Cage на мотоцикл BMW G310GS Могут быть установлены на все года выпуска Высокая степень защиты мотоцикла достигается за счет устойчивой сварной конструкции с креплением на две точки с каждой стороны. В третьей точке два каркаса соединяются между собой перемычкой под радиатором. Дуги довольно высоко поднимают мотор над асфальтом сводя вероятность его повреждения практически к нулю.', 'bmw_G310GS.jpeg', 11990, 'Ожидается поставка', 6),
+(66, 'Дуги на мотоцикл KTM Duke 250', 'Дуги безопасности для: KTM Duke 390 2021- Дуги имеют 2 независимых точки крепления с каждой стороны и перемычку между каркасами, что делает конструкцию невероятно крепкой. Поэтому такие дуги э то надежная защита крышек двигателя и значительное снижение вероятности повреждения переднего пластика и бака.', 'ktm_DUKE250.jpeg', 10990, '1', 2),
+(67, 'Клетка на мотоцикл HONDA NC750X', 'Клетки серии DAMPER пришли в мир дорожных мотоциклов из стантрайдинга и являются продолжением нашей знаменитой серии клеток PRO. Геометрия клетки DAMPER одинаковая с клеткой PRO, но основное отличие этих клеток - они предназначены для использования с демпферными слайдерами. Демпферный слайдер - это слайдер который закреплен на клетке не жестко, а имеет возможность двигаться под воздействием внешней силы. При этом большая часть этой силы уходит на сжимание демпфирующего элемента и не передается на раму и двигатель мотоцикла! Конечно такая конструкция делает клетку несколько шире, однако мы настоятельно рекомендуем их новичкам, мотошколам и многим продвинутым райдерам. Обратите внимание, что клетка достойно отрабатыает падения как самостоятельно так и в комплекте с сабкейджем.', 'honda_NC750X.jpeg', 25990, '20', 7),
+(68, 'Дуги на мотоцикл YAMAHA TRACER 900', 'Защитные дуги изготовлены из сочленения бесшовного профиля диаметром 27 и 22 мм с толщиной стенки 2,5 мм. Несущие каркасы выполнены более мощными, нежели соединяющие их перемычки. Таким образом мы добились уменьшения веса без снижения защитных свойств дуг. Тип дуг ближе к туристическому. Каркасы заведены вверх для защиты обтекателя. Крышки мотора также находятся под прикрытием. Под радиатором левый и правый каркас соединяются между собой в единый узел, это способствует более лучшему распределению удара и его гашению. Конфигурация дуг позволяет закрепить на них дополнительный свет, экшн камеру, держатель для бутылки и тд. ', 'yamaha_TRACER900.jpeg', 15990, '5', 8),
+(69, 'Дуги на мотоцикл SUZUKI GSX-R600', 'Защитные дуги crash cage для Suzuki GSXR 600 и GSXR 750 от 2011 года выпуска и моложе В комплект поставки входят слайдеры на дуги. Крепление осуществляется на 3 точки с каждой стороны. Требуется доработка пластика в передней точке крепления дуги Очень надежная конструкция. ', 'suzuki_GSX-R600.jpeg', 9990, '45', 9),
+(70, 'Дуги на мотоцикл BAJAJ Dominar', 'Дуги безопасности для BAJAJ Dominar 2016-2018 г.в. Независимое крепление на 3 точки с каждой стороны.', 'bajaj_DOMINAR.jpeg', 9490, 'Нет в наличии', 10),
+(71, 'Дуги на мотоцикл BMW S1000R', 'Дуги безопасности Crash Cage на мотоцикл BMW S1000R Могут быть установлены на модификации 2014-2016 годов выпуска Дуги имеют по три точки крепления дуг с каждой стороны. В комплекте вы найдете пару слайдеров высотой 40мм, которые можно приобрести отдельно в случае их повреждения. Высокопрочный крепеж твердостью 10.9 Для тех, кто считает подобную конструкцию не достаточно весомой для своей манеры езды - наша компания предлагает установить мотоклетку серии PRO, сабкейдж и колесные пеги.', 'bmw_S1000R.jpeg', 9990, '3', 11),
+(72, 'Дуги на мотоцикл HONDA CB1000R', 'Дуги безопасности для Honda CB1000R. Крепление осуществляется на 3 точки с каждой стороны.', 'honda_CB1000R.jpeg', 9990, '10', 12);
 
 -- --------------------------------------------------------
 
@@ -297,12 +336,12 @@ INSERT INTO `products` (`id`, `name`, `description`, `image`, `price`) VALUES
 --
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `login` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password_hash` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `cookie_hash` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `last_action` timestamp NULL DEFAULT current_timestamp(),
+  `id` int NOT NULL,
+  `login` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password_hash` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cookie_hash` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_action` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `is_admin` bit(1) NOT NULL DEFAULT b'0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -314,7 +353,10 @@ INSERT INTO `users` (`id`, `login`, `name`, `password_hash`, `cookie_hash`, `las
 (1, 'admin', 'Администратор', '$2y$10$5WKMYg9MUNS6BThn4gHtLuoZlK3N5IcVNnYXRSVNt1FSh9eJCUovK', '', '2020-10-15 06:37:24', b'1'),
 (3, 'vasya', 'Вася', '$2y$10$4ZDj9KyPZ56Un5KDw6WEHeguaDYS4g5QrKtV0Q3KyLwNf3x0jO1au', '9262738935f8c414506ef47.65101352', '2020-10-17 19:20:05', b'0'),
 (4, 'test2', 'Вася', '$2y$10$AIN2fMls4LB7V69ZwTwxHuia9l5RMmkOJYe/7LqdAX4M9bo5rpPPe', NULL, '2020-11-12 09:08:40', b'0'),
-(5, 'www', 'Василий1', '$2y$10$ZaUFeGObVSnmSKnRon6c3OcGL2.SkHjQ4aPJQN7y47vxhaZ2ZtlSS', '', '2020-11-13 21:38:54', b'0');
+(5, 'www', 'Василий1', '$2y$10$ZaUFeGObVSnmSKnRon6c3OcGL2.SkHjQ4aPJQN7y47vxhaZ2ZtlSS', '', '2020-11-13 21:38:54', b'0'),
+(6, 'seil', 'Марина', '$2y$10$W8OS2BznCfLw/kG9a2mljOdU3C4FwuCesP4KTHleN7ZXymwdPP3Cq', NULL, '2021-11-15 12:59:11', b'0'),
+(7, 'qwerty', 'Марина22', '$2y$10$RYYltSATLEZXUHvHtU9oDOkgmNpj8xQYchgJzTJSeLQkJqYcz0uCO', NULL, '2021-12-03 12:26:36', b'0'),
+(8, 'souls', 'Bogdanova Marina', '$2y$10$H0dOTxUw/h0fnbIFRWR9jegd4fnGZJ4ea8xfBAHkr1Kp729kqTP.G', NULL, '2021-12-27 10:24:21', b'0');
 
 --
 -- Индексы сохранённых таблиц
@@ -346,6 +388,12 @@ ALTER TABLE `gallery`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Индексы таблицы `models`
+--
+ALTER TABLE `models`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `news`
 --
 ALTER TABLE `news`
@@ -371,6 +419,7 @@ ALTER TABLE `order_items`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
+ALTER TABLE `products` ADD FULLTEXT KEY `name` (`name`,`description`);
 
 --
 -- Индексы таблицы `users`
@@ -387,55 +436,61 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=160;
 
 --
 -- AUTO_INCREMENT для таблицы `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT для таблицы `feedback_product`
 --
 ALTER TABLE `feedback_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT для таблицы `gallery`
 --
 ALTER TABLE `gallery`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+
+--
+-- AUTO_INCREMENT для таблицы `models`
+--
+ALTER TABLE `models`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT для таблицы `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT для таблицы `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT для таблицы `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
