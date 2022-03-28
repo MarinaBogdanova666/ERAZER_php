@@ -1,20 +1,9 @@
 <header class="header">
 
     <div class="header__bottom">
-        <div class="header__menu">
-            <a href="/">Главная</a>
-            <a href="/catalog">Каталог</a>
-            <a href="/delivery">Доставка</a>
-            <a href="/search"><img class="icon" src="icons/search.svg"></a>
-            {% if isAdmin %}
-                <a href="/admin">Админка</a>
-            {% endif %}
-        </div>
-        <a href="/" class="logo"><img src="icons/logo.svg" width="100%"></a>
-        <div class="right_menu">
-            <div class="header__cart">
-                <a id="header_cart" href="/cart"><img src="icons/cart.svg" width="100%"></a>
-                <div id="cart_counter" class="count_in_cart">{{ countInCart|default(0) }}</div>
+        <div class="header_top">
+            <div>
+                <div>8-999-999-99-99</div>
             </div>
             <div class="header__login">
                 {% if isAuth %}
@@ -23,6 +12,24 @@
                     <a class="header__login-href" href="/login">Личный кабинет</a>
                 {% endif %}
             </div>
+        </div>
+        <div class="header_center">
+            <a href="/" class="logo"><img src="/icons/logo.svg" width="100%"></a>
+            <div class="right_menu">
+                <div class="header__cart">
+                    <a id="header_cart" href="/cart"><img src="/icons/cart.svg" width="100%"></a>
+                    <div id="cart_counter" class="count_in_cart">{{ countInCart|default(0) }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="header__menu">
+            <a href="/">Главная</a>
+            <a href="/catalog">Каталог</a>
+            <a href="/delivery">Доставка</a>
+            <a href="/search"><img class="icon" src="/icons/search.svg"></a>
+            {% if isAdmin %}
+                <a href="/admin">Админка</a>
+            {% endif %}
         </div>
     </div>
 </header>

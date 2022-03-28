@@ -52,7 +52,8 @@ class Controller implements IController
         if ($this->useLayout) {
             return $this->renderTemplate("layouts/{$this->layout}", [
                 'menu' => $this->renderTemplate('menu', $params),
-                'content' => $this->renderTemplate($template, $params)
+                'content' => $this->renderTemplate($template, $params),
+                'footer' => $this->renderTemplate('footer', $params),
             ]);
         } else {
             return $this->renderTemplate($template, $params);
