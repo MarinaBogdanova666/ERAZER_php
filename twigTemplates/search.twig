@@ -1,10 +1,33 @@
-<h3>Поиск по сайту</h3>
+<h2>Поиск по сайту</h2>
 <form action="/search" method="post">
 	<input type="search" name="search">
 	<button>Поиск</button>
 </form>
-<p class="error_message">{{ item.message_error }}</p>
-{% for value in item %}
-	<h5>{{ value.name }}</h5>
-	<p>{{ value.description }}</p> 
-{% endfor %}
+
+{% if item == null %}
+	<p class="error_message">{{ message.error}}</p>
+{% else %}
+	<p class="success_message">{{ message.success }}</p>
+	<div class='search__catalog'>
+		{% for value in item %}
+			<div class='search__catalog_item'>
+				<a class="search__catalog_link" href="/catalog/{{ value.id }}">
+					<img class="product_item__img" src="/images/products/{{ value.image }}" alt="{{ value.image }}">
+					<p>{{ value.name }}</p>
+				</a>
+				<div class='search__catalog_description'>
+					<p>Цена: {{ value.price }}₽</p>
+					{% if value.quantity_stock == 'Ожидается поставка' %}
+						<p>{{ value.quantity_stock }}</p>
+					{% elseif value.quantity_stock == 'Нет в наличии' %}
+						<p>{{ value.quantity_stock }}</p>
+					{% elseif value.quantity_stock == 'Под заказ' %}
+						<p>{{ value.quantity_stock }}</p>
+					{% else %}
+						<p>Количество: {{ value.quantity_stock }}</p>
+					{% endif %}
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+{% endif %}
