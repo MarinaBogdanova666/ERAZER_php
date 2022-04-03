@@ -1,32 +1,16 @@
-<div class="filters">
-    <div>
-        <h2>Подбор запчастей по вашему мотоциклу</h2>
-    </div>
-    <form>
-        <select name="select1">
-            <option value="value1" selected>Марка</option>
-            <option value="value1">Значение 1</option>
-            <option value="value2" >Значение 2</option>
-            <option value="value3">Значение 3</option>
-        </select>
-        <select name="select2">
-            <option value="value1" selected>Объём</option>
-            <option value="value1">Значение 1</option>
-            <option value="value2">Значение 2</option>
-            <option value="value3" >Значение 3</option>
-        </select>
-        <select name="select3">
-            <option value="value1" selected>Модель</option>
-            <option value="value1" >Значение 1</option>
-            <option value="value2">Значение 2</option>
-            <option value="value3">Значение 3</option>
-        </select>
-        <select name="select4">
-            <option value="value1" selected>Год выпуска</option>
-            <option value="value1" >Значение 1</option>
-            <option value="value2">Значение 2</option>
-            <option value="value3">Значение 3</option>
-        </select>
-        <button type="submit">Подобрать</button>
-    </form>
-</div>
+<h2>Подбор запчастей по вашему мотоциклу</h2>
+<select name="select__brand" id="select-1">
+	<option selected hidden>Марка</option>
+	{% for value in item %}
+		<option value="{{ value.id }}" class="brand">{{ value.name }}</option>
+	{% endfor %}
+</select>
+<select name="select__model" id="select-2" disabled>
+	<option class="models76876" selected hidden>Модель</option>
+</select>
+<select name="select__volume" id="select-3" disabled>
+	<option selected hidden>Объём</option>
+</select>
+<button class="filteres" disabled>Подобрать</button>
+<div class="products"></div>
+<script src="/js/filteres.js"></script>

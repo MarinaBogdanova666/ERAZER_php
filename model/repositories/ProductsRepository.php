@@ -17,15 +17,28 @@ class ProductsRepository extends Repository
         return "products";
     }
 
-//    Функция получения всех моделей для формы с выбором(только наработка)
-
-    public function getModels() {
+    public function getModels()
+    {
         $sql = "SELECT * FROM models GROUP BY brand ORDER BY brand ASC";
         return $this->getDb()->queryAll($sql);
     }
 
-    public function getSearch($params) {
-        $sql = "SELECT * FROM `products` WHERE MATCH (name,description) AGAINST ('{$params}')";
+
+    public function getSearch($params)
+    {
+        $sql = "SELECT * FROM products WHERE MATCH (name,description) AGAINST ('{$params}')";
+        return $this->getDb()->queryAll($sql);
+    }
+    
+    public function getModelsFilteres($params)
+    {
+        $sql = "SELECT * FROM models WHERE brand_id = {$params}";
+        return $this->getDb()->queryAll($sql);
+    }
+
+    public function getFilteres($modelsId, $modelsVolume)
+    {
+        $sql = "SELECT * FROM products WHERE models_id = {$modelsId} AND models_volume = {$modelsVolume}";
         return $this->getDb()->queryAll($sql);
     }
 }
