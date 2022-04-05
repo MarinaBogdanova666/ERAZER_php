@@ -1,7 +1,7 @@
 <h2>Поиск по сайту</h2>
 <form action="/search" method="post">
 	<input type="search" name="search">
-	<button>Поиск</button>
+	<button class="selection-form-button">Поиск</button>
 </form>
 
 {% if item == null %}
@@ -29,5 +29,5 @@
 				</div>
 			</div>
 		{% endfor %}
-	</div> 
+	</div>
 {% endif %}

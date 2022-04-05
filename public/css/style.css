@@ -3,15 +3,10 @@
     padding: 0;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-
 /*body {*/
 /*    min-height: 100%;*/
 /*}*/
-html, body {
-    height: 100%;
-    margin: 0px;
-    padding: 0px;
-}
+html,body { height: 100%; margin: 0px; padding: 0px; }
 
 ul {
     padding-left: 20px;
@@ -22,28 +17,20 @@ li {
 }
 
 .product-item {
-    margin: 10px;
+    margin-bottom: 20px;
+    margin-right: 20px;
     clear: both;
-    background-color: #eeeeee;
-    border-radius: 8px;
-    padding: 20px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
 }
 
 .product-item__link {
     display: block;
-    text-decoration: none;
-    color: black;
+    padding: 0px 10px;
 }
 
 .products {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    margin: 10px -10px;
+    justify-content: space-evenly;
 }
 
 .products .product-item {
@@ -52,6 +39,7 @@ li {
 
 .product_item__price {
     font-weight: bold;
+    padding: 10px;
     float: left;
 }
 
@@ -65,26 +53,18 @@ li {
 }
 
 .product-item::after {
-    display: block;
-    clear: both;
+    display:block;
+    clear:both;
 }
 
 .product_item__img {
     width: 300px;
     height: 300px;
-    object-fit: cover;
-}
-
-.product_item__price_block {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: space-between;
 }
 
 
-input[type="text"],
-input[type="password"],
+input[type="text"], 
+input[type="password"], 
 textarea,
 select {
     width: 270px;
@@ -100,11 +80,12 @@ select {
     background-color: #FF6600;
     color: white;
     text-decoration: none;
-    padding: 10px;
+    padding: 10px;    
+    margin: 5px 5px 5px 0px;
 }
 
 .black-button:hover {
-    background-color: hsl(24, 100%, 30%);
+    background-color: green;
     cursor: pointer;
 }
 
@@ -114,63 +95,62 @@ select {
 }
 
 .header {
-
+    height: 80px;
     padding: 5px;
     background-color: #104386;
     color: white;
     display: flex;
     align-items: center;
-    flex-direction: column;
+    justify-content: center;
 }
 
 .header a {
     color: white;
     text-decoration: none;
+    padding: 10px;
     display: block;
 }
 
 .header a:hover {
+    /*border-bottom: 1px solid white;*/
     text-decoration: underline;
     text-underline-offset: 8px;
 }
 
-.header__bottom {
-    max-width: 1200px;
-    padding: 10px;
-    width: 100%;
-    box-sizing: border-box;
+.header__login {
+    height: 20px;
+    margin: 0px 10px;
 }
 
-.header__bottom>div+div {
-    margin-top: 10px;
+.header__bottom {
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;   
+    height: 40px;
+    padding: 10px;
+    width: 100%;
 }
 
 .header__menu {
     display: flex;
-    justify-content: center;
-
+    align-content: center;
 }
-
-.header__menu>a+a {
-    margin-left: 16px;
-}
-
-.header__cart {
+.header__cart{
     position: relative;
-    width: 35px;
+    width: 50px;
     text-decoration: none;
-    margin-right: 10px;
 }
 
-.header__cart a:hover {
+.header__cart a:hover{
     border-bottom: none;
 }
-
 .count_in_cart {
     color: #222555;
     position: absolute;
-    top: -8px;
-    right: -10px;
+    top: 4px;
+    right: -6px;
     background-color: white;
     min-width: 16px;
     height: 16px;
@@ -181,14 +161,12 @@ select {
     justify-content: center;
     padding: 2px;
 }
-
 .right_menu {
     display: flex;
     align-items: center;
 
 }
-
-.right_menu div+div {
+.right_menu div + div {
     margin-left: 20px;
 }
 
@@ -214,8 +192,7 @@ h2, h3 {
     margin: 0 auto;
     box-sizing: border-box;
     background-color: white;
-    min-height: calc(100% - 90px);
-    /* 90 - шапка */
+    min-height: calc(100% - 90px); /* 90 - шапка */
 }
 
 .cart__item {
@@ -231,7 +208,7 @@ h2, h3 {
 }
 
 
-.total_cart {
+.total_cart{
     float: right;
     font-size: 20px;
     font-weight: bold;
@@ -260,12 +237,12 @@ h2, h3 {
     justify-content: space-between;
     align-content: center;
     flex-wrap: nowrap;
-    margin-bottom: 10px;
+    margin-bottom: 10px;    
 }
 
 .auth-form__bottom div {
     display: flex;
-    align-content: center;
+    align-content: center;  
     padding-top: 10px;
 }
 
@@ -278,16 +255,16 @@ input[type="checkbox"] {
     font-weight: 600;
 }
 
-.success_message {
-    color: #1eb600;
-    font-weight: 600;
-}
-
 .header__login {
     display: flex;
     justify-content: space-between;
 }
 
+a.header__login-href {
+    margin-right: 10px;
+    padding: 2px 0px;
+    height: 27px;
+}    
 
 .feedback-author {
     margin: 10px 0;
@@ -310,7 +287,6 @@ td, th {
     font-size: 16px;
 
 }
-
 .logo {
     width: 200px;
 }
@@ -321,24 +297,20 @@ td, th {
     padding: 20px 40px;
     box-sizing: border-box;
 }
-
 .filters form {
     display: flex;
     justify-content: space-between;
 }
-
-.filters form select {
+.filters form select{
     width: 100%;
     margin-right: 3%;
     height: 40px;
 }
-
-.filters form button {
+.filters form button{
     width: 50%;
     margin-right: 3%;
     height: 40px;
 }
-
 .background {
     display: flex;
     justify-content: center;
@@ -348,44 +320,7 @@ td, th {
     height: 100%;
     z-index: -10;
 }
-
-.background img {
+.background img{
     margin: 0 5%;
     height: 100%;
-}
-
-.header_top {
-    display: flex;
-    justify-content: space-between;
-}
-
-.header_center {
-    display: flex;
-    justify-content: space-between;
-}
-
-footer {
-    padding: 12px 0;
-    background-color: #E1D4C0;
-    text-align: center;
-}
-
-.product-item:hover {}
-
-.search__catalog {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-}
-
-.search__catalog_item {
-    width: 340px;
-    border-bottom: 1px solid #dddddd;
-    padding: 10px;
-}
-
-.search__catalog_description {
-    display: flex;
-    justify-content: space-between;
-    font-weight: 600;
 }

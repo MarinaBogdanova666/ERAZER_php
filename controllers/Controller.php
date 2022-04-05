@@ -50,13 +50,16 @@ class Controller implements IController
         $this->setGlobalParams();
         $params = array_merge($params, $this->globalParams);
         if ($this->useLayout) {
-            return $this->renderTemplate("layouts/{$this->layout}", [
-                'menu' => $this->renderTemplate('menu', $params),
-                'content' => $this->renderTemplate($template, $params),
-                'footer' => $this->renderTemplate('footer', $params),
-            ]);
+
+            $renderArr['menu'] = $this->renderTemplate('menu', $params);
+            $renderArr['content'] = $this->renderTemplate($template, $params);
+            if ($template == "index"){
+                $renderArr['filteres'] = $this->renderTemplate('filteres', $params);
+            }
+            return $this->renderTemplate("layouts/{$this->layout}", $renderArr);
+
         } else {
-            return $this->renderTemplate($template, $params);
+            return $this->renderTemplate($template);
         }
     }
 

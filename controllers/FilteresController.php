@@ -9,7 +9,7 @@ class FilteresController extends Controller
     public function actionIndex()
     {
         $item = \Brand::getModels();
-        echo $this->render('filteres', [
+        echo $this->render('index', [
             'page_size' => \App::getConfig('pageSize'),
             'item' => $item
         ]);

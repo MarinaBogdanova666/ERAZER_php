@@ -26,7 +26,7 @@ selectBrand.addEventListener("change", function () {
     }
 
     (async () => {
-        const response = await fetch('/filteres', {
+        const response = await fetch('/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
@@ -98,7 +98,7 @@ buttons.addEventListener('click', function () {
     }
 
     (async () => {
-        const result = await fetch('/filteres/getItem', {
+        const result = await fetch('/getItem', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
