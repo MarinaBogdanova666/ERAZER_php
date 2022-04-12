@@ -10,7 +10,7 @@ return [
         'driver' => 'mysql',
         'host' => 'localhost',
         'login' => 'root',
-        'password' => '',
+        'password' => 'root',
         'database' => 'geekbrains',
         'charset' => 'utf8'
     ],
