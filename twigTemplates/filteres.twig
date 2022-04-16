@@ -3,7 +3,7 @@
 		<h2>Подбор запчастей по вашему мотоциклу</h2>
 		<select name="select__brand selection-form-select" id="select-1">
 			<option selected hidden>Марка</option>
-			{% for value in item %}
+			{% for value in brand %}
 				<option value="{{ value.id }}" class="brand selection-form-option">{{ value.name }}</option>
 			{% endfor %}
 		</select>

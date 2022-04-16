@@ -17,7 +17,7 @@ class BrandRepository extends Repository
         return "brand";
     }
 
-    public function getModels()
+    public function getBrand()
     {
         $sql = "SELECT * FROM brand";
         return $this->getDb()->queryAll($sql);

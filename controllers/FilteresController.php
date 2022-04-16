@@ -2,27 +2,33 @@
 
 namespace app\controllers;
 
-use app\model\Brand;
-
 class FilteresController extends Controller
 {
     public function actionIndex()
     {
-        $item = \Brand::getModels();
+        $brand = \Brand::getBrand();
         echo $this->render('index', [
             'page_size' => \App::getConfig('pageSize'),
-            'item' => $item
+            'brand' => $brand
         ]);
     }
+
     public function actionModels($params)
     {
-        $response = \Products::getModelsFilteres($params['id']);
-        echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+        $model = \Models::getModels($params['id']);
+        echo json_encode($model, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
     }
 
-    public function actionFilteres($params)
+    public function actionAttributes($params)
     {
-        $result = \Products::getFilteres($params['id'], $params['volume']);
-        echo json_encode($result, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+        $attributes = \Attributes::getAttributes($params['id']);
+        echo json_encode($attributes, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
     }
+
+    public function actionResult($params)
+    {
+        $result = \Products::getFilter($params['id']);
+  /*       var_dump($params['id']); */
+        echo json_encode($result, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    } 
 }

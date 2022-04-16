@@ -3,6 +3,8 @@ const selectModel = document.getElementById('select-2');
 const selectVolume = document.getElementById('select-3');
 const buttons = document.querySelector('.filteres');
 
+
+//--- СЕЛЕКТ БРЕНДОВ ---//
 selectBrand.addEventListener("change", function () {
 
     selectModel.disabled = false;
@@ -26,7 +28,52 @@ selectBrand.addEventListener("change", function () {
     }
 
     (async () => {
-        const response = await fetch('/', {
+        const response = await fetch('/getModels', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(
+                {
+                    id: id
+                }
+            )
+        });
+
+        let answer = await response.json();
+        
+        function CreateModel(params) {
+            for (let item in params) {
+                let models = params[item];
+                let opt = document.createElement('option');
+         /*        opt.value = models.name; */
+                opt.setAttribute('data-model-id', models.id);
+                opt.className = "models";
+                opt.innerHTML = models.name;
+                selectModel.append(opt);
+            }
+        }
+        CreateModel(answer);
+    })();
+});
+
+
+//--- СЕЛЕКТ МОДЕЛЕЙ ---//
+selectModel.addEventListener("change", function () {
+
+    selectVolume.disabled = false;
+
+    let id = selectModel.options[selectModel.selectedIndex].getAttribute('data-model-id')
+
+    let checkVolume = document.querySelectorAll('.volume');
+    if (checkVolume.length > 0) {
+        buttons.disabled = true;
+        for (let i = 0; i < checkVolume.length; i++) {
+            checkVolume[i].remove();
+        }
+    }
+    (async () => {
+        const response = await fetch('/getAttributes', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
@@ -40,50 +87,26 @@ selectBrand.addEventListener("change", function () {
 
         let answer = await response.json();
 
-        function CreateModel(params) {
+        function CreateAttribute(params) {
             for (let item in params) {
-                let models = params[item];
+                let volume = params[item];
                 let opt = document.createElement('option');
-                opt.value = models.volume;
-                opt.setAttribute('data-model-id', models.id);
-                opt.className = "models";
-                opt.innerHTML = models.models;
-                selectModel.append(opt);
+                opt.setAttribute('data-volume-id', volume.filter_id);
+                opt.className = "volume";
+                opt.innerHTML = volume.volume;
+                selectVolume.append(opt);
             }
         }
-        CreateModel(answer);
+        CreateAttribute(answer);
     })();
 });
 
-selectModel.addEventListener("change", function () {
 
-    selectVolume.disabled = false;
-
-    let id = selectModel.options[selectModel.selectedIndex].getAttribute('data-model-id')
-    let volume = this.value;
-
-    let checkVolume = document.querySelectorAll('.volume');
-    if (checkVolume.length > 0) {
-        buttons.disabled = true;
-        for (let i = 0; i < checkVolume.length; i++) {
-            checkVolume[i].remove();
-        }
-    }
-
-    function CreateVolume(id, volume) {
-        let opt = document.createElement('option');
-        opt.value = volume;
-        opt.setAttribute('data-volume-id', id);
-        opt.innerHTML = volume;
-        opt.className = "volume";
-        selectVolume.append(opt);
-    }
-    CreateVolume(id, volume);
-});
-
+//--- СЕЛЕКТ ОБЪЕМОВ ---//
 selectVolume.addEventListener("change", function () {
     buttons.disabled = false;
 });
+
 
 buttons.addEventListener('click', function () {
 
@@ -98,15 +121,14 @@ buttons.addEventListener('click', function () {
     }
 
     (async () => {
-        const result = await fetch('/getItem', {
+        const result = await fetch('/getResult', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             },
             body: JSON.stringify(
                 {
-                    id: id,
-                    volume: volume
+                    id: id
                 }
             )
         });
@@ -122,7 +144,7 @@ buttons.addEventListener('click', function () {
         function CreateProducts(params) {
             for (let item in params) {
                 let product = params[item];
-                products.insertAdjacentHTML('beforebegin', "<div class='product-item'><h1>" + product.name + "</h1><p>" + product.description + "</p></div>");
+                products.insertAdjacentHTML('beforebegin', "<div class='product-item'><h1>" + product.name + "</h1><img class='product_item__img' src='/images/products/"+ product.image +"' alt="+ product.name +"><p>" + product.description + "</p></div>");
             }
         }
         CreateProducts(answer);

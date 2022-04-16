@@ -30,15 +30,10 @@ class ProductsRepository extends Repository
         return $this->getDb()->queryAll($sql);
     }
     
-    public function getModelsFilteres($params)
-    {
-        $sql = "SELECT * FROM models WHERE brand_id = {$params}";
-        return $this->getDb()->queryAll($sql);
-    }
 
-    public function getFilteres($modelsId, $modelsVolume)
+    public function getFilter($params)
     {
-        $sql = "SELECT * FROM products WHERE models_id = {$modelsId} AND models_volume = {$modelsVolume}";
+        $sql = "SELECT * FROM products WHERE filter_id IN ({$params}, 0)";
         return $this->getDb()->queryAll($sql);
     }
 }
