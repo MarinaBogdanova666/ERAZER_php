@@ -3,10 +3,10 @@ class OrderItems extends ItemDynamicList {
     renderTemplate() {
         return `
         <tr>
-            <td><a href="/order/${this.uId}">${this.date}</a></td>
-            <td>${this.id}</td>
-            <td>${this.total}</td>
-            <td>${this.status}</td>
+            <td><a class="normal-link transition" href="/order/${this.uId}">${this.date}</a></td>
+            <td class="center-text">${this.id}</td>
+            <td class="center-text">${this.total} &#8381;</td>
+            <td class="center-text">${this.status}</td>
         </tr>
         `;
     }
