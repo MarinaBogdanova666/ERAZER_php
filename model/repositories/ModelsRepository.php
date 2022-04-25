@@ -17,6 +17,12 @@ class ModelsRepository extends Repository
         return "models";
     }
 
+    public function getAllModels()
+    {
+        $sql = "SELECT * FROM models";
+        return $this->getDb()->queryAll($sql);
+    }
+
     public function getModels($params)
     {
         $sql = "SELECT * FROM models WHERE brand_id = {$params}";

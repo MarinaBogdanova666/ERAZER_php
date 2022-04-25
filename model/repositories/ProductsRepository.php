@@ -3,6 +3,7 @@
 namespace app\model\repositories;
 
 use app\model\Repository;
+use app\model\Model;
 use app\model\entities\Product;
 
 class ProductsRepository extends Repository
@@ -17,19 +18,41 @@ class ProductsRepository extends Repository
         return "products";
     }
 
+    protected function update(Model $entity) {
+            return parent::update($entity);
+    }
+
     public function getModels()
     {
         $sql = "SELECT * FROM models GROUP BY brand ORDER BY brand ASC";
         return $this->getDb()->queryAll($sql);
     }
 
+    public function getAllProducts()
+    {
+        $sql = "SELECT * FROM products";
+        return $this->getDb()->queryAll($sql);
+    }
+
+    public function getOneProducts($params)
+    {
+        $sql = "SELECT * FROM products WHERE id = {$params}";
+        return $this->getDb()->queryAll($sql);
+    }
+
+/*    public function updateProducts($params)
+    {
+        
+        $sql = "UPDATE products SET name = {$params['name']} WHERE id = {$params['id']}";
+        var_dump($sql);
+        return $this->getDb()->queryAll($sql);
+    }  */
 
     public function getSearch($params)
     {
         $sql = "SELECT * FROM products WHERE MATCH (name,description) AGAINST ('{$params}')";
         return $this->getDb()->queryAll($sql);
     }
-    
 
     public function getFilter($params)
     {

@@ -1,0 +1,178 @@
+{% for product in products %}
+	<div id="product_id" data-id="{{ product.id }}">
+		<p>
+			Наиминование
+		</p>
+		<input id="name" type="text" value="{{ product.name }}"></div>
+	<div>
+		<p>
+			Описание
+		</p>
+		<textarea rows="8" cols="100" id="description">
+			{{ product.description }}
+		</textarea>
+	</div>
+	<div>
+		<h2>
+			Цена
+		</h2>
+		<input type="text" id="price" value="{{ product.price }}"></div>
+	<div>
+		<h2>
+			Статус товара
+		</h2>
+		{% if  product.quantity_stock matches '/^\\d+$/' %}
+			<div>
+				<input id="quantity" type="text" value="{{ product.quantity_stock }}" placeholder="количество"></div>
+			<div>
+				<input type="checkbox" class="check" value="Ожидается поставка">
+				Ожидается поставка
+			</div>
+			<div>
+				<input type="checkbox" class="check" value="Нет в наличии">
+				Нет в наличии
+			</div>
+			<div>
+				<input type="checkbox" class="check" value="Под заказ">
+				Под заказ
+			</div>
+		{% elseif product.quantity_stock == 'Ожидается поставка' %}
+			<div>
+				<input id="quantity" type="text" placeholder="количество"></div>
+			<div>
+				<input type="checkbox" class="check" checked value="Ожидается поставка">
+				Ожидается поставка
+			</div>
+			<div>
+				<input type="checkbox" class="check" value="Нет в наличии">
+				Нет в наличии
+			</div>
+			<div>
+				<input type="checkbox" class="check" value="Под заказ">
+				Под заказ
+			</div>
+		{% elseif product.quantity_stock == 'Нет в наличии' %}
+			<div>
+				<input id="quantity" type="text" placeholder="количество"></div>
+			<div>
+				<input type="checkbox" class="check" value="Ожидается поставка">
+				Ожидается поставка
+			</div>
+			<div>
+				<input type="checkbox" class="check" checked value="Нет в наличии">
+				Нет в наличии
+			</div>
+			<div>
+				<input type="checkbox" class="check" value="Под заказ">
+				Под заказ
+			</div>
+		{% elseif product.quantity_stock == 'Под заказ' %}
+			<div>
+				<input id="quantity" type="text" placeholder="количество"></div>
+			<div>
+				<input type="checkbox" class="check" value="Ожидается поставка">
+				Ожидается поставка
+			</div>
+			<div>
+				<input type="checkbox" class="check" value="Нет в наличии">
+				Нет в наличии
+			</div>
+			<div>
+				<input type="checkbox" class="check" checked value="Под заказ">
+				Под заказ
+			</div>
+		{% endif %}
+	</div>
+	<div>
+		<h2>
+			Категория
+		</h2>
+		<select id="categories_id">
+			{% for category in categories %}
+				{% if product.categories_id == category.id %}
+					<option value="{{ category.id }}" selected hidden>
+						{{ category.name }}
+					</option>
+				{% endif %}
+				<option value="{{ category.id }}">
+					{{ category.name }}
+				</option>
+			{% endfor %}
+		</select>
+	</div>
+	{# 	<div>
+			<p>Привязка к модели мотоцикла</p>
+			<select>
+				{% for model in models %}
+					{% if product.categories_id == category.id %}
+						<option selected hidden>
+							{{category.name}}</option>
+					{% endif %}
+					<option value="{{ model.id }}" class="brand selection-form-option">{{ model.name }}</option>
+				{% endfor %}
+			</select>
+		</div> #}
+	<button class="button">
+		Обновить
+	</button>
+{% endfor %}
+<script>
+
+	let div = document.getElementById('product_id');
+let = id = div.dataset.id;
+
+let button = document.querySelector('.button');
+
+button.addEventListener("click", function () {
+
+let name = document.getElementById('name').value;
+let description = document.getElementById('description').value;
+let price = document.getElementById('price').value;
+let quantity_stock = '';
+let check = document.querySelector('.check:checked')
+console.log(check);
+
+if (check == null) {
+ quantity_stock = document.getElementById('quantity').value;
+} else {
+ quantity_stock = check.value;
+}
+
+let categories_id = document.getElementById('categories_id').value;
+
+(async () => {
+const response = await fetch('/admin/products/edit', {
+method: 'POST',
+headers: {
+'Content-Type': 'application/json;charset=utf-8'
+},
+body: JSON.stringify(
+{
+id: id,
+name: name,
+description: description,
+price: price,
+quantity_stock: quantity_stock,
+categories_id: categories_id
+}
+)
+});
+
+/* let answer = await response.json(); */
+})();
+});
+
+const checks = document.querySelectorAll('.check');
+checks.forEach(function (ch) {
+ch.addEventListener('click', function () {
+var that = this;
+checks.forEach(function (ch2) {
+if (ch2 != that) 
+ch2.checked = false;
+
+
+
+});
+});
+});
+</script>

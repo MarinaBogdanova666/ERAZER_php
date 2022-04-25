@@ -8,6 +8,8 @@ App::bind('session', 'app\\engine\\Session', true);
 App::bind(\app\interfaces\IRenderer::class, 'app\\engine\\TwigRender'); 
 App::bind('news', 'app\\model\\repositories\\NewsRepository', true);
 
+App::bind('categories', 'app\\model\\repositories\\CategoriesRepository', true);
+
 App::bind('brand', 'app\\model\\repositories\\BrandRepository', true);
 App::bind('models', 'app\\model\\repositories\\ModelsRepository', true);
 App::bind('attributes', 'app\\model\\repositories\\AttributesRepository', true);

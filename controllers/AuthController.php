@@ -7,20 +7,22 @@ use app\model\entities\User;
 class AuthController extends Controller
 {
 
-    public function actionLogin($params) {
+    public function actionLogin($params)
+    {
         if (isset($params['login']) && isset($params['password'])) {
-            \Auth::auth($params['login'], $params['password'], $params['save']);    
+            \Auth::auth($params['login'], $params['password'], $params['save']);
             if (!\Auth::isAuth()) {
-                $params['message'] = 'Не верная пара логин/пароль!'; 
+                $params['message'] = 'Не верная пара логин/пароль!';
             } else {
                 header('Location: /');
-                Die();
+                die();
             }
         }
         echo $this->render('auth', $params);
     }
 
-    protected function updateUserProfile($params) {
+    protected function updateUserProfile($params)
+    {
         $result = [];
         $user = \Auth::getUserByLoginPassword($params['login'], $params['current-password']);
         if (isset($user)) {
@@ -35,7 +37,6 @@ class AuthController extends Controller
             } else {
                 $result['message'] = 'Произошла ошибка при обновлении данных';
             };
-
         } else {
             $result['message'] = 'Не верный пароль';
         }
@@ -43,12 +44,13 @@ class AuthController extends Controller
         return $result;
     }
 
-    public function actionProfile($params) {
+    public function actionProfile($params)
+    {
         if (!\Auth::isAuth()) {
             header('Location: /login');
-            Die();            
+            die();
         }
-        
+
         $profileInfo = [
             'login' => $params['login'],
             'userName' => $params['userName']
@@ -57,13 +59,14 @@ class AuthController extends Controller
         if (isset($params['current-password']) && \Auth::getUserInfo()['login'] == $params['login']) {
             //Пытаемся обновить профиль и результат присоединим к массиву паратмеров передаваемых в шаблон!
             $profileInfo = array_merge($profileInfo, $this->updateUserProfile($params));
-        } 
+        }
 
         echo $this->render('profile', $profileInfo);
     }
 
 
-    public function actionRegister($params) {
+    public function actionRegister($params)
+    {
         $message = "";
         $header = "";
 
@@ -85,6 +88,4 @@ class AuthController extends Controller
             'message' => $message
         ]);
     }
-
-
 }

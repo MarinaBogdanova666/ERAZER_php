@@ -89,6 +89,7 @@ abstract class Repository implements IRepository
     }
 
     protected function update(Model $entity) {
+      /*   var_dump($entity); */
         $sets = [];
         $params = [];
         $result = true;
