@@ -54,25 +54,6 @@ class AdminController extends Controller
         }
     }
 
-    public function actionUpdateProducts($params)
-    {
-        $products = \Products::where('id', $params['id'])->first();
-
-        if (\Auth::isAdmin()) {
-            $products->name = $params['name'];
-            $products->description = $params['description'];
-            $products->price = $params['price'];
-            $products->quantity_stock = $params['quantity_stock'];
-            $products->categories_id = $params['categories_id'];
-            \Products::save($products);
-        } else {
-            echo $this->render('accessDenited', []);
-        }
-    }
-
-
-
-
     public function actionEditProducts($params)
     {
         $products = \Products::getOneProducts($params['id']);
@@ -85,6 +66,29 @@ class AdminController extends Controller
                 'categories' => $categories,
                 'models' => $models
             ]);
+        } else {
+            echo $this->render('accessDenited', []);
+        }
+    }
+
+    public function actionUpdateProducts($params)
+    {
+        $products = \Products::where('id', $params['id'])->first();
+
+        if (\Auth::isAdmin()) {
+            $products->name = $params['name'];
+            $products->description = $params['description'];
+            $products->price = $params['price'];
+            $products->quantity_stock = $params['quantity_stock'];
+            $products->categories_id = $params['categories_id'];
+            $products->filter_id = $params['filter_id'];
+            \Products::save($products);
+            if (\Products::save($products) == true) {
+                $answer = ['result' => 'Товар изменен!'];
+            } else {
+                $answer = ['result' => 'Что-то пошло не так, не удалось изменить товар!'];
+            };
+            echo json_encode($answer, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
         } else {
             echo $this->render('accessDenited', []);
         }

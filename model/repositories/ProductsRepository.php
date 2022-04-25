@@ -40,14 +40,6 @@ class ProductsRepository extends Repository
         return $this->getDb()->queryAll($sql);
     }
 
-/*    public function updateProducts($params)
-    {
-        
-        $sql = "UPDATE products SET name = {$params['name']} WHERE id = {$params['id']}";
-        var_dump($sql);
-        return $this->getDb()->queryAll($sql);
-    }  */
-
     public function getSearch($params)
     {
         $sql = "SELECT * FROM products WHERE MATCH (name,description) AGAINST ('{$params}')";

@@ -517,3 +517,7 @@ height: 16px;
 .orders-table{
     width: 98%;
 }
+.message_products{
+    font-size: 25px;
+    font-weight: 600;
+}

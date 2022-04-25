@@ -27,7 +27,7 @@ Route::get('/admin/orders', 'Admin.Orders');
 Route::get('/admin/edit_models', 'Admin.EditModels');
 Route::get('/admin/products', 'Admin.Products');
 Route::get('/admin/products/edit/{id}', 'Admin.EditProducts');
-Route::post('/admin/products/edit', 'Admin.UpdateProducts');
+Route::post('/admin/products/update', 'Admin.UpdateProducts');
 
 Route::post('/api/orderList/{partOrders}/getItems', 'Shop.ApiOrdersList');
 Route::get('/order/{uId}', 'Shop.OrderInfo');
