@@ -10,8 +10,8 @@ return [
         'driver' => 'mysql',
         'host' => 'localhost',
         'login' => 'root',
-        'password' => '',
-        'database' => 'geekbrains',
+        'password' => 'root',
+        'database' => 'magaz',
         'charset' => 'utf8'
     ],
 ];

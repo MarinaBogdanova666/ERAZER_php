@@ -1,3 +1,23 @@
+window.addEventListener("load", function() {
+    var element = document.getElementById("catalog-menu-closer");
+    element.onclick = function(){
+        if (element.className.baseVal == "catalog-menu-close"){
+            console.log("yes");
+            document.querySelector(".catalog-menu").classList.remove("catalog-menu-closed");
+            document.querySelector(".catalog-menu").classList.add("catalog-menu-opened");
+            element.classList.remove("catalog-menu-close");
+            element.classList.add("catalog-menu-open");
+        }else{
+            console.log("no");
+            document.querySelector(".catalog-menu").classList.remove("catalog-menu-opened");
+            document.querySelector(".catalog-menu").classList.add("catalog-menu-closed");
+            element.classList.remove("catalog-menu-open");
+            element.classList.add("catalog-menu-close");
+        }
+    };
+});
+
+
 class ProductItem extends ItemDynamicList {
     renderTemplate() {
         let order_button = `<a href="javascript:void(0)" class="black-button btn-buy" data-id="${this.id}">В корзину</a>`;
