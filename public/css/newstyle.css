@@ -539,7 +539,7 @@ height: 16px;
 #catalog-menu-closer{
     position: absolute;
     top:10px;
-    left:10px;
+    left:-50px;
     width: 50px;
     height: 50px;
     cursor: pointer;
@@ -552,7 +552,7 @@ height: 16px;
     padding: 10px;
     width: 200px;
     top:10px;
-    left:60px;
+    left:10px;
     background: #ffffff;
     border: 1px solid #eceef4;
     box-sizing: border-box;
