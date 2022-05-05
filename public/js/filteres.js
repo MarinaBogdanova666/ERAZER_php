@@ -41,12 +41,12 @@ selectBrand.addEventListener("change", function () {
         });
 
         let answer = await response.json();
-        
+
         function CreateModel(params) {
             for (let item in params) {
                 let models = params[item];
                 let opt = document.createElement('option');
-         /*        opt.value = models.name; */
+                /*        opt.value = models.name; */
                 opt.setAttribute('data-model-id', models.id);
                 opt.className = "models";
                 opt.innerHTML = models.name;
@@ -121,33 +121,55 @@ buttons.addEventListener('click', function () {
     }
 
     (async () => {
-        const result = await fetch('/getResult', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-            },
-            body: JSON.stringify(
-                {
-                    id: id
-                }
-            )
-        });
+            const result = await fetch('/getResult', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify(
+                    {
+                        id: id
+                    }
+                )
+            });
 
-        let answer = await result.json();
+            let answer = await result.json();
 
-        let products = document.querySelector('.products');
+            let products = document.querySelector('.products');
 
-        if (answer.length == 0) {
-            products.insertAdjacentHTML('beforebegin', "<div class='product-item'><h1>Ничего не найдено</h1></div>");
-        }
-
-        function CreateProducts(params) {
-            for (let item in params) {
-                let product = params[item];
-                products.insertAdjacentHTML('beforebegin', "<div class='product-item'><h1>" + product.name + "</h1><img class='product_item__img' src='/images/products/"+ product.image +"' alt="+ product.name +"><p>" + product.description + "</p></div>");
+            if (answer.length == 0) {
+                products.insertAdjacentHTML('beforebegin', "<div class='product-item'><h1>Ничего не найдено</h1></div>");
             }
+
+            function CreateProducts(params) {
+                const items = params.map(product => `
+                        <div class='search__catalog_item product-item'>
+                            <a class='search__catalog_link product-item__link' href='/catalog/${product.id}'>
+                                <img class='product_item__img' src='/images/products/${product.image}' alt=${product.name}>
+                                <p class="product_item__header">${product.name}</p>
+                                <p class='product_item__price'>
+                                    Цена: ${product.price}₽
+                                </p>
+                            </a>
+                        </div>
+                `);
+                products.insertAdjacentHTML('beforebegin', `<div class='search__catalog products'>${items.join('')}</div>`)
+                // for (let item in params) {
+                //     // let product = params[item];
+                //     products.insertAdjacentHTML('beforebegin', `
+                //         <div class='search__catalog_item product-item'>
+                //             <a class='search__catalog_link product-item__link' href='/catalog/${product.id}'>
+                //                 <h1>${product.name}</h1>
+                //                 <img class='product_item__img' src='/images/products/${product.image}' alt=${product.name}>
+                //                 <p class='product_item__price'>
+                //                     Цена: ${product.price}₽
+                //                 </p>
+                //             </a>
+                //         </div>
+                //     `);
+                // }
+            }
+            CreateProducts(answer);
         }
-        CreateProducts(answer);
-    }
     )();
 });

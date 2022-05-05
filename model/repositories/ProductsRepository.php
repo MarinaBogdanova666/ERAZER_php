@@ -36,4 +36,10 @@ class ProductsRepository extends Repository
         $sql = "SELECT * FROM products WHERE filter_id IN ({$params}, 0)";
         return $this->getDb()->queryAll($sql);
     }
+
+    public function getCategories($params)
+    {
+        $sql = "SELECT * FROM products WHERE categiries_id = ('{$params}')";
+        return $this->getDb()->queryAll($sql);
+    }
 }
