@@ -324,6 +324,7 @@ td, th {
     margin: 0 5%;
     height: 100%;
 }
-.category {
-
+.message_products{
+    font-size: 25px;
+    font-weight: 600;
 }

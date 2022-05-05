@@ -14,7 +14,7 @@
 
 
 -- Дамп структуры базы данных geekbrains
-CREATE DATABASE IF NOT EXISTS `geekbrains` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE IF NOT EXISTS `geekbrains`;
 USE `geekbrains`;
 
 -- Дамп структуры для таблица geekbrains.attributes
