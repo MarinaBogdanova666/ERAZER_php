@@ -32,10 +32,47 @@ class AdminController extends Controller
     {
         $models = \Models::getAllModels();
         if (\Auth::isAdmin()) {
-            echo $this->render('edit_models', [
+            echo $this->render('models', [
                 'page_size' => \App::getConfig('pageSize'),
                 'models' => $models
             ]);
+        } else {
+            echo $this->render('accessDenited', []);
+        }
+    }
+
+    public function actionEditModels($params)
+    {
+        $models = \Models::getOneModels($params['id']);
+        $brands = \brand::getBrand();
+        if (\Auth::isAdmin()) {
+            echo $this->render('edit', [
+                'page_size' => \App::getConfig('pageSize'),
+                'brands' => $brands,
+                'models' => $models
+            ]);
+        } else {
+            echo $this->render('accessDenited', []);
+        }
+    }
+
+    public function actionUpdateModels($params)
+    {
+    /*     var_dump($params); */
+        $models = \Models::where('id', $params['id'])->first();
+
+        if (\Auth::isAdmin()) {
+            $models->name = $params['name'];
+            $models->brand_id = $params['brand_id'];
+
+            \Models::save($models);
+
+            if (\Models::save($models) == true) {
+                $answer = ['result' => 'Модель изменена!'];
+            } else {
+                $answer = ['result' => 'Что-то пошло не так, не удалось изменить модель!'];
+            };
+            echo json_encode($answer, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
         } else {
             echo $this->render('accessDenited', []);
         }

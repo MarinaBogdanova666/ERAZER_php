@@ -24,7 +24,9 @@ Route::post('/api/cart/{action}', 'Cart.Api');
 
 Route::get('/admin', 'Admin.Index');
 Route::get('/admin/orders', 'Admin.Orders');
-Route::get('/admin/edit_models', 'Admin.EditModels');
+Route::get('/admin/models', 'Admin.Models');
+Route::get('/admin/models/edit/{id}', 'Admin.EditModels');
+Route::post('/admin/models/update', 'Admin.UpdateModels');
 Route::get('/admin/products', 'Admin.Products');
 Route::get('/admin/products/edit/{id}', 'Admin.EditProducts');
 Route::post('/admin/products/update', 'Admin.UpdateProducts');
