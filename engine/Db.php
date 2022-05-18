@@ -3,9 +3,9 @@
 namespace app\engine;
 
 
-use app\interfaces\IDb;
+use app\interfaces\iDb;
 
-class Db implements IDb
+class Db implements iDb
 {
     private $config;
 

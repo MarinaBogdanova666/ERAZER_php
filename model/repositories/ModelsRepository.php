@@ -22,6 +22,11 @@ class ModelsRepository extends Repository
         $sql = "SELECT * FROM models";
         return $this->getDb()->queryAll($sql);
     }
+    public function getOneModels($params)
+    {
+        $sql = "SELECT * FROM models WHERE id = {$params}";
+        return $this->getDb()->queryAll($sql);
+    }
 
     public function getModels($params)
     {
