@@ -59,6 +59,7 @@ class App {
     
     addListenerToBtnBuy(querySelector) {
         let buy_btn = document.querySelector(querySelector);
+        if (!buy_btn) return;
         buy_btn.addEventListener('click', async event => {
             let answer = await application.postJson('/api/cart/addItem', {
                 'product_id': buy_btn.dataset['id']

@@ -154,20 +154,6 @@ buttons.addEventListener('click', function () {
                         </div>
                 `);
                 products.insertAdjacentHTML('beforebegin', `<div class='search__catalog products'>${items.join('')}</div>`)
-                // for (let item in params) {
-                //     // let product = params[item];
-                //     products.insertAdjacentHTML('beforebegin', `
-                //         <div class='search__catalog_item product-item'>
-                //             <a class='search__catalog_link product-item__link' href='/catalog/${product.id}'>
-                //                 <h1>${product.name}</h1>
-                //                 <img class='product_item__img' src='/images/products/${product.image}' alt=${product.name}>
-                //                 <p class='product_item__price'>
-                //                     Цена: ${product.price}₽
-                //                 </p>
-                //             </a>
-                //         </div>
-                //     `);
-                // }
             }
             CreateProducts(answer);
         }

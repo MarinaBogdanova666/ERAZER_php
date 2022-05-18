@@ -565,6 +565,7 @@ height: 16px;
     color: #6d6e71;
     text-decoration: none;
     box-sizing: border-box;
+    width: max-content;
 }
 
 .catalog-menu-item:hover{
@@ -602,4 +603,5 @@ height: 16px;
 .catalog-menu-opened{
     width: 200px;
     transition: 0.6s;
+    overflow: hidden;
 }

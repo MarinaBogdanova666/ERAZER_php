@@ -7,6 +7,7 @@ Route::post('/getAttributes', 'Filteres.Attributes');
 Route::post('/getResult', 'Filteres.Result');
 
 Route::post('/api/products/getItems', 'Product.ApiDynamicList');
+Route::post('/api/products/getItems/{id}', 'Product.ApiDynamicListCat');
 Route::get('/catalog', 'Product.Index');
 Route::get('/catalog/{id}', 'Product.Card');
 Route::post('/api/news/getItems', 'News.ApiDynamicList');

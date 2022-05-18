@@ -10,18 +10,27 @@
         </svg>
 
         <div class="catalog-menu catalog-menu-closed">
-            <a class="catalog-menu-item" href="#">Защита для мотоцикла</a>
-            <a class="catalog-menu-item" href="#">Расходные материалы</a>
-            <a class="catalog-menu-item" href="#">Масло и мотохимия</a>
-            <a class="catalog-menu-item" href="#">Мотозапчасти</a>
+            <div id="1" class="catalog-menu-item">Защита для мотоцикла</div>
+            <div id="2" class="catalog-menu-item">Расходные материалы</div>
+            <div id="3" class="catalog-menu-item">Масло и мотохимия</div>
+            <div id="4" class="catalog-menu-item">Мотозапчасти</div>
         </div>
     </div>
 </div>
     <div id="catalog" class="products">
 <script src="/js/catalog.js"></script>
 <script>
+    let catalog = new Products('catalog', {{ page_size }});
+
     document.addEventListener("DOMContentLoaded", event => {
-        let catalog = new Products('catalog', {{ page_size }});
         catalog.fillVisible();
     });
+
+    document.querySelectorAll('.catalog-menu-item').forEach( el => {
+        el.addEventListener('click', event => {
+            catalog.categories_id = el.id;
+            catalog.clearList();
+            catalog.fillVisible();
+        })
+    })
 </script>

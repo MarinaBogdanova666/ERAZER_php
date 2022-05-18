@@ -1,3 +1,4 @@
+
 class ItemDynamicList {
 
     constructor(elList, id, data = {}, className = '') 
@@ -46,7 +47,7 @@ class ItemDynamicList {
 
 class DynamicList {
 
-    constructor(idList, pageSize = 5, urlApi = '/api/list', itemClassName='dl__item') 
+    constructor(idList, pageSize = 5, urlApi = '/api/list', itemClassName='dl__item')
     {
         this.elList = document.getElementById(idList);
         this.items = {};
@@ -58,13 +59,20 @@ class DynamicList {
         this.doUpload = false;
         this.urlApi = urlApi;
         this.addEventListeners();
+        this.categories_id = null;
     }
 
+
+
     addEventListeners() {
-        document.addEventListener("scroll", event => {
-            this.scrollEvent(event);
-        });     
+        document.addEventListener("scroll", e => this.scrollEvent(e));
     }
+
+    removeEventListeners() {
+        document.removeEventListener("scroll", e => this.scrollEvent(e));
+    }
+
+
 
     scrollEvent() {
         if (window.pageYOffset + window.innerHeight + 20 > this.elList.offsetHeight + this.elList.offsetTop) {
@@ -77,13 +85,17 @@ class DynamicList {
     }
 
     getURLApi(action='getItems') {
-        return this.urlApi + '/' + action;
+        if (this.categories_id) {
+            return this.urlApi + '/' + action + '/' + this.categories_id;
+        } else {
+            return this.urlApi + '/' + action;
+        }
     }
 
     async addItem(id, data, position = 'beforeend') 
     {
         if (!(id in this.items)) {
-            this.items[id] = this.newItem(id, data);   
+            this.items[id] = this.newItem(id, data);
         } else {
             Object.assign(this.items[id], data);    
         }
@@ -93,7 +105,7 @@ class DynamicList {
             await itemDL.updateElement();
         } else {
             this.elList.insertAdjacentHTML(position, itemDL.render());
-        } 
+        }
         this.addElEventListeners(itemDL.getElementId());
     }
 
@@ -113,6 +125,7 @@ class DynamicList {
     {
         this.elList.innerHTML = '';
         this.items = {};
+        this.removeEventListeners();
     }
     
     deleteMessage() 
@@ -135,11 +148,12 @@ class DynamicList {
         return {'count': count, 'offset': offset};
     }
 
-    async showItems(count, offset) {
+    async showItems(count, offset, categories_id) {
         if (!this.doUpload) {
             this.doUpload = true;
             this.showMessage('Загрузка ...');
-            let answer = await application.postJson(this.getURLApi(), this.getJsonBody(count, offset));
+            let answer = await application.postJson(this.getURLApi(), {...this.getJsonBody(count, offset), categories_id: categories_id});
+            console.log(answer);
             if (!answer || answer.totalCount === undefined) {
                 this.showMessage('Не удалось загрузить элементы!');
             } else  {
@@ -149,16 +163,18 @@ class DynamicList {
                     this.addItem(item.id, item);
                 }
                 this.countItems = answer.totalCount;
+
             }
             this.doUpload = false;
         }    
     }
 
+
     async getNewPage() {
         let oldCount = Object.keys(this.items).length;
         if (this.mayBeLoad && (this.countItems == -1 || oldCount < this.countItems)) {
             this.mayBeLoad = false;
-            await this.showItems(this.pageSize, oldCount);
+            await this.showItems(this.pageSize, oldCount, this.categories_id);
             if (Object.keys(this.items).length > oldCount) {
                 this.mayBeLoad = true;
             }
