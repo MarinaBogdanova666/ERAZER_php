@@ -3,6 +3,10 @@
     padding: 0;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
+*,*:focus,*:hover{
+    outline:none;
+}
 /*body {*/
 /*    min-height: 100%;*/
 /*}*/

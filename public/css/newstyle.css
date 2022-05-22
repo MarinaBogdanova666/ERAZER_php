@@ -434,6 +434,7 @@ border-color: #cecece;
 
 .products .product-item {
     width: 340px;
+    margin: 40px 0;
 }
 
 .product_item__bottom{
@@ -604,4 +605,11 @@ height: 16px;
     width: 200px;
     transition: 0.6s;
     overflow: hidden;
+}
+.index-info-block{
+    max-width: 1184px;
+    margin: 50px auto;
+}
+.info-block-text{
+    max-width: 500px;
 }
